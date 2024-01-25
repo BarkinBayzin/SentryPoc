@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SentryPoc</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SentryPoc.styles.css" asp-append-version="true" />
+    <script src="https://js.sentry-cdn.com/77fb46fd3a3d6cb7f3e4bd3f81057b0a.min.js"
+            crossorigin="anonymous"></script>
+
+    <script src="https://browser.sentry-cdn.com/7.98.0/bundle.tracing.replay.min.js"
+            integrity="sha384-UvHWeqCggKcNkbpIGdBc71QNfgDLgILxk3LuGRO52syAA+UBCH+uZJJBs++zWUpL"
+            crossorigin="anonymous"></script>
+
+    <script>
+        Sentry.onLoad(function () {
+            Sentry.init({
+                dsn: "https://77fb46fd3a3d6cb7f3e4bd3f81057b0a@o4506633075425280.ingest.sentry.io/4506633247653888",
+
+                // This sets the sample rate to be 10%. You may want this to be 100% while
+                // in development and sample at a lower rate in production
+                replaysSessionSampleRate: 1.0,
+
+                // If the entire session is not sampled, use the below sample rate to sample
+                // sessions when an error occurs.
+                replaysOnErrorSampleRate: 1.0,
+
+                integrations: [
+                    Sentry.replayIntegration({
+                        // Additional SDK configuration goes in here, for example:
+                        maskAllText: false,
+                        blockAllMedia: true,
+                    }),
+                ],
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SentryPoc</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - SentryPoc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
